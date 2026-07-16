@@ -33,6 +33,12 @@ def lire_transactions():
     transactions = pd.concat(liste, ignore_index=True)
 
     # =====================================================
+    # Identifiant unique
+    # =====================================================
+
+    transactions.insert(0, "ID", range(1, len(transactions) + 1))
+
+    # =====================================================
     # Renommage des colonnes
     # =====================================================
 
@@ -66,7 +72,7 @@ def lire_transactions():
     )
 
     # =====================================================
-    # Remplacement des IBAN par les noms des comptes
+    # Remplacement des IBAN par les noms
     # =====================================================
 
     transactions["Compte"] = transactions["Compte"].map(

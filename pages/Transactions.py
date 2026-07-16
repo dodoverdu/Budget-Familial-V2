@@ -2,6 +2,7 @@ import streamlit as st
 
 from belfius import lire_transactions
 from categorisation import categoriser
+from utils.export_excel import exporter_transactions
 
 # ======================================================
 # Configuration
@@ -62,6 +63,10 @@ with col3:
         ["Toutes"] + sorted(transactions["Catégorie"].unique())
     )
 
+a_classer = st.checkbox(
+    "❓ Afficher uniquement les transactions à classer"
+)
+
 # ======================================================
 # Application des filtres
 # ======================================================
@@ -84,24 +89,44 @@ if compte != "Tous":
 if categorie != "Toutes":
     df = df[df["Catégorie"] == categorie]
 
+if a_classer:
+    df = df[df["Catégorie"] == "❓ A classer"]
+
 # ======================================================
 # Préparation affichage
 # ======================================================
 
-df = df.sort_values("Date", ascending=False)
+df = df.sort_values("Date", ascending=False).copy()
 
 df["Date"] = df["Date"].dt.strftime("%d/%m/%Y")
 
 df["Montant"] = df["Montant"].apply(format_montant)
 
 # ======================================================
-# Résultat
+# Informations
 # ======================================================
 
-st.caption(f"{len(df)} transaction(s)")
+col1, col2 = st.columns([1, 1])
+
+with col1:
+    st.caption(f"{len(df)} transaction(s)")
+
+with col2:
+
+    excel = exporter_transactions(df)
+
+    st.download_button(
+        "📥 Export Excel",
+        data=excel,
+        file_name="transactions.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+# ======================================================
+# Tableau
+# ======================================================
 
 st.dataframe(
-
     df[
         [
             "Date",
@@ -112,7 +137,6 @@ st.dataframe(
             "Sous-catégorie"
         ]
     ],
-
     use_container_width=True,
     hide_index=True
 )
