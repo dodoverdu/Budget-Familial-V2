@@ -32,25 +32,20 @@ def lire_transactions():
 
     transactions = pd.concat(liste, ignore_index=True)
 
-    # ------------------------
+    # =====================================================
     # Renommage des colonnes
-    # ------------------------
+    # =====================================================
 
     transactions = transactions.rename(columns={
-
         "Date de comptabilisation": "Date",
         "Nom contrepartie contient": "Contrepartie",
         "Transaction": "Libellé",
-        "Communications": "Communication",
-        "Compte": "Compte",
-        "Montant": "Montant",
-        "Compte contrepartie": "Compte contrepartie"
-
+        "Communications": "Communication"
     })
 
-    # ------------------------
+    # =====================================================
     # Conversion des montants
-    # ------------------------
+    # =====================================================
 
     transactions["Montant"] = (
         transactions["Montant"]
@@ -60,9 +55,9 @@ def lire_transactions():
         .astype(float)
     )
 
-    # ------------------------
+    # =====================================================
     # Conversion des dates
-    # ------------------------
+    # =====================================================
 
     transactions["Date"] = pd.to_datetime(
         transactions["Date"],
@@ -70,10 +65,24 @@ def lire_transactions():
         errors="coerce"
     )
 
+    # =====================================================
+    # Remplacement des IBAN par les noms des comptes
+    # =====================================================
+
+    transactions["Compte"] = transactions["Compte"].map(
+        lambda iban: COMPTES.get(
+            str(iban).strip(),
+            {"nom": iban}
+        )["nom"]
+    )
+
     return transactions
 
 
 def lire_soldes():
+    """
+    Lit les soldes actuels des comptes.
+    """
 
     comptes = []
 
