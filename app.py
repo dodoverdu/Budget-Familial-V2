@@ -16,6 +16,20 @@ st.set_page_config(
 st.title("💰 Budget Familial")
 
 # ======================================================
+# Fonctions d'affichage
+# ======================================================
+
+def format_montant(valeur):
+    return (
+        f"{valeur:,.2f}"
+        .replace(",", "X")
+        .replace(".", ",")
+        .replace("X", ".")
+        + " €"
+    )
+
+
+# ======================================================
 # Chargement des données
 # ======================================================
 
@@ -51,25 +65,25 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.metric(
         "💰 Patrimoine",
-        f"{patrimoine:,.2f} €"
+        format_montant(patrimoine)
     )
 
 with col2:
     st.metric(
         "💸 Dépenses",
-        f"{depenses:,.2f} €"
+        format_montant(depenses)
     )
 
 with col3:
     st.metric(
         "💵 Recettes",
-        f"{recettes:,.2f} €"
+        format_montant(recettes)
     )
 
 with col4:
     st.metric(
         "📄 Transactions",
-        nb_transactions
+        f"{nb_transactions:,}".replace(",", " ")
     )
 
 st.divider()
@@ -80,8 +94,12 @@ st.divider()
 
 st.subheader("🏦 Situation bancaire")
 
+soldes_affichage = soldes.copy()
+
+soldes_affichage["Solde"] = soldes_affichage["Solde"].apply(format_montant)
+
 st.dataframe(
-    soldes,
+    soldes_affichage,
     use_container_width=True,
     hide_index=True
 )
@@ -98,7 +116,12 @@ dernieres = (
     transactions
     .sort_values("Date", ascending=False)
     .head(15)
+    .copy()
 )
+
+dernieres["Date"] = dernieres["Date"].dt.strftime("%d/%m/%Y")
+
+dernieres["Montant"] = dernieres["Montant"].apply(format_montant)
 
 st.dataframe(
     dernieres[
