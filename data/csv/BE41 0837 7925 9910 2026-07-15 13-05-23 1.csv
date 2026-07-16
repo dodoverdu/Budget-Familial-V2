@@ -1,0 +1,15 @@
+Date de comptabilisation à partir de;01/01/2026
+Date de comptabilisation jusqu'au;15/07/2026
+Montant à partir de;
+Montant jusqu'à;
+Numéro d'extrait à partir de;
+Numéro d'extrait jusqu'au;
+Communication;
+Nom contrepartie contient;
+Compte contrepartie;
+Dernier solde;0,00 EUR
+Date/heure du dernier solde;15/07/2026 12:56:18
+;
+Compte;Date de comptabilisation;Numéro d'extrait;Numéro de transaction;Compte contrepartie;Nom contrepartie contient;Rue et numéro;Code postal et localité;Transaction;Date valeur;Montant;Devise;BIC;Code pays;Communications
+BE41 0837 7925 9910;14/01/2026;00001;23;BE57 0637 9980 3835;Verdussen - Forissier V;;;VIREMENT BELFIUS MOBILE VERS BE57 0637 9980 3835       Verdussen - Forissier V                                REF. : 090548561E201 VAL. 14-01;14/01/2026;-1,77;EUR;GKCCBEBB;;
+BE41 0837 7925 9910;02/01/2026;00001;22;;;;;INTERETS CREDITEURS                                    REF. : 0815413486361 VAL. 01-01;01/01/2026;1,77;EUR;;;INTERETS CREDITEURS                                    REF. : 0815413486361 VAL. 01-01
