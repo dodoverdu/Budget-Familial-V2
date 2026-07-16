@@ -1,4 +1,4 @@
-from belfius import lire_transactions, lire_soldes
+from core.belfius import lire_transactions, lire_soldes
 
 transactions = lire_transactions()
 soldes = lire_soldes()

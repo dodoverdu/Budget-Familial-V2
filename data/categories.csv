@@ -1,23 +1,21 @@
 Colonne;Valeur;Catégorie;Sous-catégorie
-Nom contrepartie contient;RENMANS;Courses;Boucherie
-Nom contrepartie contient;ALDI;Courses;Supermarché
-Nom contrepartie contient;DELHAIZE;Courses;Supermarché
-Nom contrepartie contient;COLRUYT;Courses;Supermarché
-Nom contrepartie contient;CARREFOUR;Courses;Supermarché
-
-Nom contrepartie contient;TOTAL;Transport;Carburant
-Nom contrepartie contient;SHELL;Transport;Carburant
-Nom contrepartie contient;Q8;Transport;Carburant
-
-Nom contrepartie contient;COOLBLUE;Shopping;Electronique
-Nom contrepartie contient;APPLE;Shopping;Electronique
-Nom contrepartie contient;AMAZON;Shopping;Divers
-Nom contrepartie contient;MANGO;Shopping;Vêtements
-
-Nom contrepartie contient;SPOTIFY;Abonnements;Musique
-Nom contrepartie contient;NETFLIX;Abonnements;Streaming
-Nom contrepartie contient;DISNEY;Abonnements;Streaming
-
-Nom contrepartie contient;STIB;Transport;Transport public
-Nom contrepartie contient;SNCB;Transport;Train
-Nom contrepartie contient;TEC;Transport;Bus
+Contrepartie;RENMANS;Courses;Boucherie
+Contrepartie;ALDI;Courses;Supermarché
+Contrepartie;DELHAIZE;Courses;Supermarché
+Contrepartie;COLRUYT;Courses;Supermarché
+Contrepartie;CARREFOUR;Courses;Supermarché
+;;;
+Contrepartie;TOTAL;Transport;Carburant
+Contrepartie;SHELL;Transport;Carburant
+Contrepartie;Q8;Transport;Carburant
+Contrepartie;COOLBLUE;Shopping;Electronique
+Contrepartie;APPLE;Shopping;Electronique
+Contrepartie;AMAZON;Shopping;Divers
+Contrepartie;MANGO;Shopping;Vêtements
+Contrepartie;SPOTIFY;Abonnements;Musique
+Contrepartie;NETFLIX;Abonnements;Streaming
+Contrepartie;DISNEY;Abonnements;Streaming
+Contrepartie;STIB;Transport;Transport public
+Contrepartie;SNCB;Transport;Train
+Contrepartie;TEC;Transport;Bus
+Contrepartie;Verdussen - Forissier V;Abonnements;Musique

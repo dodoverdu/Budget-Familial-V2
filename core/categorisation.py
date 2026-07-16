@@ -26,10 +26,48 @@ def charger_regles():
     )
 
 
+def ajouter_regle(
+    colonne,
+    valeur,
+    categorie,
+    sous_categorie
+):
+    """
+    Ajoute une règle dans le fichier categories.csv.
+    """
+
+    regles = charger_regles()
+
+    nouvelle = pd.DataFrame([
+        {
+            "Colonne": colonne,
+            "Valeur": valeur,
+            "Catégorie": categorie,
+            "Sous-catégorie": sous_categorie
+        }
+    ])
+
+    regles = pd.concat(
+        [regles, nouvelle],
+        ignore_index=True
+    )
+
+    regles = regles.drop_duplicates()
+
+    regles.to_csv(
+        FICHIER,
+        sep=";",
+        index=False,
+        encoding="utf-8"
+    )
+
+    print("Nombre de règles :", len(regles))
+    print("=================================\n")
+
+
 def categoriser(df):
     """
-    Ajoute automatiquement les colonnes
-    Catégorie et Sous-catégorie.
+    Applique les règles de catégorisation.
     """
 
     df = df.copy()
@@ -41,21 +79,11 @@ def categoriser(df):
 
     for _, regle in regles.iterrows():
 
-        colonne = regle["Colonne"]
-        valeur = str(regle["Valeur"]).upper()
-
-        # Compatibilité avec les anciens noms Belfius
-        correspondance = {
-            "Nom contrepartie contient": "Contrepartie",
-            "Transaction": "Libellé",
-            "Communications": "Communication",
-            "Compte": "Compte",
-            "Montant": "Montant"
-        }
-
-        colonne = correspondance.get(colonne, colonne)
+        colonne = str(regle["Colonne"]).strip()
+        valeur = str(regle["Valeur"]).strip().upper()
 
         if colonne not in df.columns:
+            print(f"Colonne introuvable : {colonne}")
             continue
 
         masque = (
@@ -65,6 +93,11 @@ def categoriser(df):
             .str.upper()
             .str.contains(valeur, na=False)
         )
+
+        nb = masque.sum()
+
+        if nb > 0:
+            print(f"{valeur} -> {nb} transaction(s)")
 
         df.loc[masque, "Catégorie"] = regle["Catégorie"]
         df.loc[masque, "Sous-catégorie"] = regle["Sous-catégorie"]

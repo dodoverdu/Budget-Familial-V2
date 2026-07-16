@@ -1,7 +1,7 @@
 import streamlit as st
 
-from belfius import lire_transactions
-from categorisation import categoriser
+from core.belfius import lire_transactions
+from core.categorisation import categoriser
 from utils.export_excel import exporter_transactions
 
 # ======================================================

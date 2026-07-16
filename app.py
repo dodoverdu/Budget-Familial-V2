@@ -1,7 +1,8 @@
 import streamlit as st
 
-from belfius import lire_transactions, lire_soldes
-from categorisation import categoriser
+from core.database import creer_base
+from core.belfius import lire_transactions, lire_soldes
+from core.categorisation import categoriser
 
 # ======================================================
 # Configuration
@@ -12,6 +13,12 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
+
+# ======================================================
+# Initialisation
+# ======================================================
+
+creer_base()
 
 st.title("💰 Budget Familial")
 
